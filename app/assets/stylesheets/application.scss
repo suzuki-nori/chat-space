@@ -1,4 +1,41 @@
-@import "controllers";
 @import "reset";
-@import "messages";
+@import "config/variable";
+@import "config/colors";
 @import "font-awesome";
+@import "fa";
+@import "modules/form";
+@import "modules/group";
+@import "main-header";
+@import "messages";
+@import "modules/side_bar";
+@import "user";
+@import "modules/flash-box";
+
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+.wrapper{
+  width:  2000px;
+}
+
+.chat-side {
+  width: 300px;
+  color: white;
+  float: left;
+
+  a {
+    color: white;
+  }
+  
+}
+
+.chat-main {
+  width: calc(100vw - 300px);
+  float: left;
+}
