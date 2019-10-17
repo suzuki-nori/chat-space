@@ -1,4 +1,11 @@
 $(document).on('turbolinks:load', function(){
+  function scrollBottom(){
+    var target = $('.message').last();
+    var position = target.offset().top + $('.messages').scrollTop();
+    $('.messages').animate({
+      scrollTop: position
+    }, 300, 'swing');
+  }
   function buildHTML(message) {
     var content = message.content ? `${ message.content }` : "";
     var img = message.image ? `<img src= ${ message.image }>` : "";
@@ -37,18 +44,11 @@ $(document).on('turbolinks:load', function(){
       $('.messages').append(html);
       $('#message_content').val('');
       scrollBottom();
-      function scrollBottom(){
-        var target = $('.message').last();
-        var position = target.offset().top + $('.messages').scrollTop();
-        $('.messages').animate({
-          scrollTop: position
-        }, 300, 'swing');
-      }
     })
-    .fail(function(data){
+    .fail(function(){
       alert('エラーが発生したためメッセージは送信できませんでした。');
     })
-    .always(function(data){
+    .always(function(){
       $('.form__submit').prop('disabled', false);　//ここで解除している
     })
   })
