@@ -115,16 +115,15 @@
     }
 
     .chat-group-user__btn {
+      float: right;
       display: inline-block;
       cursor: pointer;
 
       &.chat-group-user__btn--add {
-        float: right;
         color: #38aef0;
       }
 
       &.chat-group-user__btn--remove {
-        float: right;
         color: #f05050;
       }
     }
