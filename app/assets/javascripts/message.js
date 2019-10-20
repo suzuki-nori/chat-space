@@ -1,56 +1,64 @@
-$(document).on('turbolinks:load', function(){
-  function scrollBottom(){
-    var target = $('.message').last();
-    var position = target.offset().top + $('.messages').scrollTop();
-    $('.messages').animate({
-      scrollTop: position
-    }, 300, 'swing');
-  }
+$(function() {
   function buildHTML(message) {
-    var content = message.content ? `${ message.content }` : "";
-    var img = message.image ? `<img src= ${ message.image }>` : "";
-    var html = `<div class="message" data-id="${message.id}">
-                  <div class="message__upper-info">
-                    <p class="message__upper-info__talker">
-                      ${message.user_name}
-                    </p>
-                    <p class="message__upper-info__date">
-                      ${message.date}
-                    </p>
-                  </div>
-                  <p class="message__text">
-                    <div>
-                    ${content}
-                    </div>
-                    ${img}
-                  </p>
-                </div>`
-  return html;
-  }
-  $('#new_message').on('submit', function(e){
+    var html = `<div class="message" data-id="${ message.id }" data-user_id="${message.user_id}"}>
+  <div class="message__upper-info">
+    <p class="message__upper-info__talker">
+      ${ message.name }
+    </p>
+    <p class="message__upper-info__date">
+      ${ message.created_at}
+    </p>
+    </div><div class="message__text">`
+
+    if (message.content!=""){
+      html += `<p class="lower-message__content">${ message.content }</p>`
+    }
+  
+    if (message.image!=null){
+      html += `<img src='${ message.image }', class='lower-message__image'>`
+    }
+  
+    html += '</div>'
+
+    group_message_update(message);
+    return html;
+
+  }  
+
+  $('#new_message').on('submit', function(e) {
     e.preventDefault();
-    var message = new FormData(this);
-    var url = (window.location.href);
+    var formData = new FormData(this);
+    var textField = $('.form__message');
+    var imgField = $('#message_image');
+    var messagesField = $('.messages');
+    var url = $(this).attr('action')
     $.ajax({
       url: url,
-      type: 'POST',
-      data: message,
+      type: "POST",
+      data: formData,
       dataType: 'json',
       processData: false,
       contentType: false
     })
-    .done(function(data){
+    .done(function(data) {
+      if (Object.keys(data).length !== 0){
       var html = buildHTML(data);
-      $('.messages').append(html);
-      $('#message_content').val('');
-      scrollBottom();
+      messagesField.append(html);
+      $('#new_message').get(0).reset();
+      messagesField.animate({scrollTop:$(".messages")[0].scrollHeight});
+      }else{
+        flashField = $('.flash-box');
+        flashField.empty();
+        var html = `<div class="alert">メッセージを入力してくだい</div>`
+        flashField.append(html);
+      }
     })
-    .fail(function(){
-      alert('エラーが発生したためメッセージは送信できませんでした。');
+    .fail(function() {
+      alert('message error');
     })
     .always(function(){
-      $('.form__submit').prop('disabled', false);　//ここで解除している
-    })
-  })
-  
+      $(".form__submit").removeAttr("disabled");
+    });
+  });
+
 });
