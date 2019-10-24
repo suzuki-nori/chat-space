@@ -46,7 +46,8 @@ $(document).on('turbolinks:load', function() {
       messagesField.append(html);
       $('#new_message').get(0).reset();
       messagesField.animate({scrollTop:$(".messages")[0].scrollHeight});
-      }else{
+      }
+      else{
         flashField = $('.flash-box');
         flashField.empty();
         var html = `<div class="alert">メッセージを入力してくだい</div>`
