@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(function(){
   var search_result = $("#user-search-result");
   var textField = $("#user-search-field");
   var preWord = "";

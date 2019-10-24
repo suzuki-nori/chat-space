@@ -1,13 +1,13 @@
-$(document).on('turbolinks:load', function() {
+$(function() {
   function buildHTML(message) {
-    var html = `<div class="message" data-id="${ message.id }" data-user_id="${message.user_id}"}>
-  <div class="message__upper-info">
-    <p class="message__upper-info__talker">
+  var html = `<div class="message" data-id="${ message.id }" data-user_id="${message.user_id}"}>
+    <div class="message__upper-info">
+      <p class="message__upper-info__talker">
       ${ message.name }
-    </p>
-    <p class="message__upper-info__date">
+      </p>
+      <p class="message__upper-info__date">
       ${ message.created_at}
-    </p>
+      </p>
     </div><div class="message__text">`
 
     if (message.content!=""){
@@ -46,8 +46,7 @@ $(document).on('turbolinks:load', function() {
       messagesField.append(html);
       $('#new_message').get(0).reset();
       messagesField.animate({scrollTop:$(".messages")[0].scrollHeight});
-      }
-      else{
+      }else{
         flashField = $('.flash-box');
         flashField.empty();
         var html = `<div class="alert">メッセージを入力してくだい</div>`
