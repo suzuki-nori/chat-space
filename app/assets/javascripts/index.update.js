@@ -1,4 +1,4 @@
-$(function(){
+$(document).on('turbolinks:load', function() {
   var message_id;
   var messagesField = $('.messages');
 
