@@ -60,7 +60,7 @@ $(document).on('turbolinks:load', function() {
         ($('.message')[0]) ? message_id = $('.message:last').data('id'):message_id = 0;
       messagesField.animate({scrollTop:$(".messages")[0].scrollHeight});     
       }
-      setInterval(update, 5000);
+      setInterval(update, 10000);
     }
 
 });
