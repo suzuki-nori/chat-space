@@ -1,4 +1,4 @@
-$(function() {
+$(document).on('turbolinks:load', function() {
   function buildHTML(message) {
   var html = `<div class="message" data-id="${ message.id }" data-user_id="${message.user_id}"}>
     <div class="message__upper-info">
@@ -46,7 +46,8 @@ $(function() {
       messagesField.append(html);
       $('#new_message').get(0).reset();
       messagesField.animate({scrollTop:$(".messages")[0].scrollHeight});
-      }else{
+      }
+      else{
         flashField = $('.flash-box');
         flashField.empty();
         var html = `<div class="alert">メッセージを入力してくだい</div>`
